@@ -180,7 +180,7 @@ v-model：双向绑定还需要处理视图对模型的更新
 
 至此，全部代码已经完成，双向数据绑定顺利实现！
 
-![Image text](https://github.com/dora-zc/miniature-vue/blob/master/img/3.png?raw=true)
+![Image text](https://github.com/dora-zc/miniature-vue/blob/master/img/4.png?raw=true)
 
 > 对应代码：step3.2
 
@@ -250,4 +250,4 @@ v-model：双向绑定还需要处理视图对模型的更新
 
 compile的核心逻辑是获取dom，遍历dom，获取{{}}格式的变量，以及每个dom的属性，截取v-和@开头的部分来设置响应式。
 
-![Image text](https://github.com/dora-zc/miniature-vue/blob/master/img/4.png?raw=true)
+![Image text](https://github.com/dora-zc/miniature-vue/blob/master/img/3.png?raw=true)
