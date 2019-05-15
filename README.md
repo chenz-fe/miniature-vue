@@ -9,37 +9,21 @@
 .
 
 ├── README.md
-
 ├── step0
-
 │   └── defineProperty_test.html
-
 ├── step1
-
 │   ├── XVue.js
-
 │   └── index.html
-
 ├── step2
-
 │   ├── XVue.js
-
 │   └── index.html
-
 ├── step3.1
-
 │   ├── XVue.js
-
 │   ├── compile.js
-
 │   └── index.html
-
 └── step3.2
-
 ​    ├── XVue.js
-
 ​    ├── compile.js
-
 ​    └── index.html
 
 以上每个step文件夹对应下面的每一步骤，代表了代码实现的顺序，每个文件夹下的代码都可以独立运行。
@@ -96,7 +80,7 @@ Dep.target = this
 
 至此，已经完成的工作如下：
 
-![屏幕快照 2019-05-15 13.07.30](assets/屏幕快照 2019-05-15 13.07.30.png)
+![Image text](https://github.com/dora-zc/miniature-vue/blob/master/img/1.png?raw=true)
 
 > 步骤二对应代码目录：step2
 
@@ -104,7 +88,7 @@ Dep.target = this
 
 首先，需要Compile对界面模板解析指令，进行编译，编译的阶段实际是创建Watcher的阶段。Watcher是由编译器创建的。编译器在做依赖收集的时候，顺便把Watcher创建了。Watcher在创建的时候，立刻就能知道它将来要更新的是谁，它应该被谁管理，它发生变化以后值应该是什么。于是Watcher就知道调谁(Updater去做更新了)。
 
-![屏幕快照 2019-05-15 13.14.10](assets/屏幕快照 2019-05-15 13.14.10.png)
+![Image text](https://github.com/dora-zc/miniature-vue/blob/master/img/2.png?raw=true)
 
 ### 3.步骤三
 
@@ -180,7 +164,7 @@ v-model：双向绑定还需要处理视图对模型的更新
 
 至此，全部代码已经完成，双向数据绑定顺利实现！
 
-![屏幕快照 2019-05-15 17.22.53](assets/屏幕快照 2019-05-15 17.22.53.png)
+![Image text](https://github.com/dora-zc/miniature-vue/blob/master/img/3.png?raw=true)
 
 > 对应代码：step3.2
 
@@ -250,4 +234,4 @@ v-model：双向绑定还需要处理视图对模型的更新
 
 compile的核心逻辑是获取dom，遍历dom，获取{{}}格式的变量，以及每个dom的属性，截取v-和@开头的部分来设置响应式。
 
-![屏幕快照 2019-05-15 17.16.15](assets/屏幕快照 2019-05-15 17.16.15.png)
+![Image text](https://github.com/dora-zc/miniature-vue/blob/master/img/4.png?raw=true)
