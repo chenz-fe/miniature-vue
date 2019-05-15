@@ -7,39 +7,22 @@
 目录结构
 
 .
-
 ├── README.md
-
 ├── step0
-
 │   └── defineProperty_test.html
-
 ├── step1
-
 │   ├── XVue.js
-
 │   └── index.html
-
 ├── step2
-
 │   ├── XVue.js
-
 │   └── index.html
-
 ├── step3.1
-
 │   ├── XVue.js
-
 │   ├── compile.js
-
 │   └── index.html
-
 └── step3.2
-
 ​    ├── XVue.js
-
 ​    ├── compile.js
-
 ​    └── index.html
 
 以上每个step文件夹对应下面的每一步骤，代表了代码实现的顺序，每个文件夹下的代码都可以独立运行。
