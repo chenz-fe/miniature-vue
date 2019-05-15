@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    hello,
+    <span id="name"></span>
+    <script>
+      let obj = {};
+      Object.defineProperty(obj, 'name', {
+        get: function() {
+          return document.getElementById('name').innerHTML;
+        },
+        set: function(txt) {
+          document.getElementById('name').innerHTML = txt;
+        }
+      });
+      console.log('初始name:', obj.name);
+      obj.name = '小菠萝';
+      console.log('设置后的name:', obj.name);
+      
+    </script>
+  </body>
+</html>
