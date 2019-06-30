@@ -1,4 +1,4 @@
-// 扫描模板中所有依赖创建更新函数和watcher
+// 扫描模板中所有依赖（指令、插值、绑定、事件等）创建更新函数和watcher
 class Compile {
   // el是宿主元素或其选择器
   // vm当前Vue实例
@@ -8,6 +8,7 @@ class Compile {
     if (this.$el) {
       // 将dom节点转换为Fragment提高执行效率
       this.$fragment = this.node2Fragment(this.$el);
+      // 执行编译，编译完成以后所有的依赖已经替换成真正的值
       this.compile(this.$fragment);
       // 将生成的结果追加至宿主元素
       this.$el.appendChild(this.$fragment);
@@ -19,10 +20,12 @@ class Compile {
     let child;
     // 将原生节点移动至fragment
     while ((child = el.firstChild)) {
+      // appendChild 是移动操作，移动一个节点，child 就会少一个，最终结束循环
       fragment.appendChild(child);
     }
     return fragment;
   }
+  // 编译指定片段
   compile(el) {
     let childNodes = el.childNodes;
     Array.from(childNodes).forEach(node => {
@@ -45,8 +48,8 @@ class Compile {
   }
 
   compileElement(node) {
-    // console.log('开始编译元素节点');
-    // <div v-text="test" @click="onClick">{{msg}}</div>
+    // console.log('编译元素节点');
+    // <div v-text="test" @click="onClick"></div>
     const attrs = node.attributes;
     Array.from(attrs).forEach(attr => {
       const attrName = attr.name; // 获取属性名 v-text
@@ -64,7 +67,7 @@ class Compile {
   }
 
   compileText(node, exp) {
-    // console.log('开始编译文本节点');
+    // console.log('编译文本节点');
     this.text(node, this.$vm, exp);
   }
 
@@ -101,16 +104,18 @@ class Compile {
     let val = vm.exp;
     // 双绑还要处理视图对模型的更新
     node.addEventListener('input', e => {
-      vm[exp] = e.target.value;
+      vm[exp] = e.target.value; // 这里相当于执行了 set
     });
   }
 
   // 更新
+  // 能够触发这个 update 方法的时机有两个：1-编译器初始化视图时触发；2-Watcher更新视图时触发
   update(node, vm, exp, dir) {
     let updaterFn = this[dir + 'Updater'];
-    
-    updaterFn && updaterFn(node, vm[exp]);
-    new Watcher(vm, exp, function(value) {
+    updaterFn && updaterFn(node, vm[exp]); // 立即执行更新；这里的 vm[exp] 相当于执行了 get
+    new Watcher(vm, exp, function (value) {
+      // 每次创建 Watcher 实例，都会传入一个回调函数，使函数和 Watcher 实例之间形成一对一的挂钩关系
+      // 将来数据发生变化时， Watcher 就能知道它更新的时候要执行哪个函数
       updaterFn && updaterFn(node, value);
     });
   }
@@ -130,7 +135,7 @@ class Compile {
   eventHandler(node, vm, exp, dir) {
     let fn = vm.$options.methods && vm.$options.methods[exp];
     if (dir && fn) {
-      node.addEventListener(dir, fn.bind(vm),false);
+      node.addEventListener(dir, fn.bind(vm), false);
     }
   }
 }

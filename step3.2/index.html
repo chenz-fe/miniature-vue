@@ -8,14 +8,15 @@
   </head>
   <body>
     <div id="app">
-        {{test}}
-        <div v-text="test">{{msg}}</div>
-        <p>
-          <input type="text" v-model="test">
-        </p>
-        <p>
-          <button @click="onClick">按钮</button>
-        </p>
+      {{ test }}
+      <div v-text="test"></div>
+      <p>
+        <input type="text" v-model="test" />
+      </p>
+      <p v-html="html"></p>
+      <p>
+        <button @click="onClick">按钮</button>
+      </p>
     </div>
 
     <script src="./compile.js"></script>
@@ -25,23 +26,22 @@
         el: '#app',
         data: {
           test: '123',
-          foo: {bar: 'bar'},
-          html:'<button>html test</button>'
+          foo: { bar: 'bar' },
+          html: '<button>html test</button>'
         },
         methods: {
-          onClick(){
+          onClick() {
             alert('按钮点击了')
           }
-        },
-      });
-      console.log(o.$data.test); //123
-      o.$data.test = 'hello, Xvue!';
-      console.log(o.$data.test); //hello, Xvue!
+        }
+      })
+      console.log(o.$data.test) //123
+      o.$data.test = 'hello, Xvue!'
+      console.log(o.$data.test) //hello, Xvue!
 
       // console.log(o.$data.foo.bar); //bar
       // o.$data.foo.bar = 'hello,Xvue!';
       // console.log(o.$data.foo.bar); //hello,Xvue!
-      
     </script>
   </body>
 </html>
